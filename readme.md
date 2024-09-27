@@ -21,47 +21,64 @@ cd  task_management
 2. Log in to your MySQL server by running the following command:
 
 ```bash
-   mysql -u root -p
-   ```
+mysql -u root -p
+```
    Enter your password when prompted.
 
 3. Create the `task_management` database by executing:
 
-   ```sql
-   CREATE DATABASE IF NOT EXISTS task_management;
-   ```
+```sql
+CREATE DATABASE IF NOT EXISTS task_management;
+```
 
 4. (Optional) Import the provided SQL dump into the `task_management` database:
 
+   Navigate to config directory
+
 ```bash
-   mysql -u root -p task_management < task_dump.sql
+cd config
+mysql -u root -p task_management < task_dump.sql
+   ```
+
+   For Windows
+```bash
+cd config
+Get-Content task_dump.sql | mysql -u root -p task_management
    ```
 
    Enter your password when prompted.
 
 5. Verify the database and its tables:
 
-   ```sql
-   USE task_management;
-   SHOW TABLES;
-   DESC users;
-   DESC tasks;
-   SELECT * FROM users;
-   SELECT * FROM tasks;
-   ```
+```sql
+USE task_management;
+SHOW TABLES;
+DESC users;
+DESC tasks;
+SELECT * FROM users;
+SELECT * FROM tasks;
+```
 
-#### 2. Install Server Dependencies
+#### 2. Modify .env variables [ database config ]
+```bash
+DB_NAME = task_management
+DB_USER = root
+DB_PASSWORD = <Your MySQL Database Password>
+DB_HOST = localhost
+```
+
+#### 3. Install Server Dependencies
 
 1. Navigate to the server directory:
 
 ```bash
-   cd server
+cd server
    ```
 
 2. Install the required dependencies:
 
 ```bash
-   npm install
+npm install
    ```
 
 #### 3. Start the Server
@@ -72,12 +89,6 @@ Start the development server using one of the following commands:
 npm run dev
 ```
 
-Or for production:
-
-```bash
-npm start
-```
-
 -----------------------------------------------------------------------------------------------
 
 ### Step 3: Set Up the Client
@@ -85,26 +96,26 @@ npm start
 1. Navigate to the client directory:
 
  ```bash
-   cd client
+cd client
    ```
 
 2. Install the required dependencies:
 
 ```bash
-   npm install
+npm install
    ```
 
 3. Start the client in development mode:
 
 ```bash
-   npm run dev
+npm run dev
    ```
 
 4. For production:
 
 ```bash
-   npm run build
-   npm start
+npm run build
+npm start
    ```
 
 ---
