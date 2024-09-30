@@ -1,5 +1,6 @@
 import axios from "axios";
-const serverUrl = "http://localhost:5000";
+
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const getTasks = async () => {
     const response = await axios.get(serverUrl + '/task/all', { withCredentials: true });
