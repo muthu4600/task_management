@@ -19,7 +19,8 @@ const LoginForm = () => {
                 Cookies.set('token', data?.token, {
                     sameSite: 'None',
                     secure: true,
-                    expires: 1000 * 60 * 60 * 24 * 7
+                    domain: process.env.NEXT_PUBLIC_SERVER_URL,
+                    expires: 7
                 });
                 router.push('/task');
             }
