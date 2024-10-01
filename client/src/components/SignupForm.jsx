@@ -32,14 +32,7 @@ const SignupForm = () => {
         try {
             const data = await signUp({ userName: formData?.userName, email: formData?.email, password: formData?.password });
             if (data?.error) setError(data.error);
-            else {
-                Cookies.set('token', data?.user?.token, {
-                    sameSite: 'None',
-                    secure: true,
-                    expires: 7
-                });
-                router.push('/task');
-            }
+            else router.push('/task');
         } catch (error) {
             setError(error?.message);
         }

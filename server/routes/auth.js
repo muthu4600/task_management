@@ -30,6 +30,13 @@ router.post('/register', async (req, res) => {
         delete user.dataValues.password;
         user.dataValues.token = token;
 
+        // Set the JWT as a cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        });
+
         res.status(201).send({ message: 'User registered successfully', user });
     } catch (error) {
         res.send({ error: 'Failed to register user' });
@@ -48,6 +55,13 @@ router.post('/login', async (req, res) => {
         if (!isPasswordValid) return res.send({ error: 'Invalid credentials' });
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        // Set the JWT as a cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        });
 
         res.status(200).send({ token, userId: user.id });
     } catch (error) {

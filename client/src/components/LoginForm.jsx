@@ -15,14 +15,7 @@ const LoginForm = () => {
         try {
             const data = await login({ email, password });
             if (data?.error) setError(data.error);
-            if (data?.token) {
-                Cookies.set('token', data?.token, {
-                    sameSite: 'None',
-                    secure: true,
-                    expires: 7
-                });
-                router.push('/task');
-            }
+            else router.push('/task');
         } catch (err) {
             setError(err?.message)
         }
