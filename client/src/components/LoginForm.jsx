@@ -14,10 +14,12 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             const data = await login({ email, password });
-            if (data?.error) setError(data.error);
-            else router.push('/task');
+            if (data?.token) {
+                Cookies.set('token', data?.token, { expires: 1000 * 60 * 60 * 24 * 7 });
+                router.push('/task');
+            }
         } catch (err) {
-            setError(err?.message)
+            setError(err?.message);
         }
     };
 
