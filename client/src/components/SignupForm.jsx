@@ -25,14 +25,17 @@ const SignupForm = () => {
 
         // Basic validation
         if (formData.password !== formData.confirmPassword) {
-            setError("Passwords don't match");
+            setError("Passwords doesn't match");
             return;
         }
 
         try {
             const data = await signUp({ userName: formData?.userName, email: formData?.email, password: formData?.password });
             if (data?.error) setError(data.error);
-            else router.push('/task');
+            else if (data?.user) {
+                Cookies.set('token', data.user?.token, { expires: 7 });
+                router.push('/task');
+            }
         } catch (error) {
             setError(error?.message);
         }

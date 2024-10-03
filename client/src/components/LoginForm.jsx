@@ -14,8 +14,9 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             const data = await login({ email, password });
-            if (data?.token) {
-                Cookies.set('token', data?.token, { expires: 1000 * 60 * 60 * 24 * 7 });
+            if (data?.error) setError(data.error);
+            else if (data?.token) {
+                Cookies.set('token', data?.token, { expires: 7 });
                 router.push('/task');
             }
         } catch (err) {
